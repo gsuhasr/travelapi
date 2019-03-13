@@ -1,16 +1,11 @@
 package com.afkl.exercises.spring.locations;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Repository;
+import static java.util.stream.Collectors.toList;
 
 import java.io.IOException;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -18,9 +13,16 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Repository;
 
-import static java.util.stream.Collectors.toList;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Repository
@@ -62,16 +64,82 @@ public class MockedAirportRepository implements AirportRepository {
 
     private Map<String, Location> parseMockData(String lang) {
         try {
-            //log.info("Loading static resources from classpath and populating mocks.");
+            log.info("Loading static resources from classpath and populating mocks.");
             final List<Location> locations = mapper.readValue(
                     new ClassPathResource("locations_".concat(lang).concat(".json")).getInputStream(),
                     mapper.getTypeFactory().constructCollectionType(ArrayList.class, Location.class));
             return locations.parallelStream()
-                    .map(l -> new SimpleEntry<>(l.getCode(), l))
+                    .map(l -> new SimpleEntry<>(l.getCode(), l)).sorted()
                     .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
         } catch (IOException e) {
             throw new IllegalStateException("Unable to initialize mock in-memory AirportRepository.", e);
         }
     }
+
+	@Override
+	public Iterable<Location> findAll(Sort arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<Location> findAll(Pageable arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long count() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(Location arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Iterable<? extends Location> arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean exists(String arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Iterable<Location> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Location findOne(String arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Location save(Location arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterable<Location> save(Iterable<? extends Location> arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

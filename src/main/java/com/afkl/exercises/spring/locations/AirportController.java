@@ -43,7 +43,7 @@ public class AirportController {
 	@RequestMapping(value = "/metric", method = RequestMethod.GET)
 	@ResponseBody
 	public Map getMetric() {
-	    return metricService.getFullMetric();
+	    return metricService.getStatusMetric();
 	}
 	
 	

@@ -4,7 +4,10 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.Optional;
 
-public interface AirportRepository {
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface AirportRepository  extends PagingAndSortingRepository<Location, String>{
 
     Optional<Location> get(Locale locale, String key);
 

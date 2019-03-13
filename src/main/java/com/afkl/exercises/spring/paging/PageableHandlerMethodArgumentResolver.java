@@ -25,6 +25,7 @@ public class PageableHandlerMethodArgumentResolver implements HandlerMethodArgum
         final int size = Optional.ofNullable(nativeWebRequest.getParameter("size"))
                 .map(s -> Math.abs(Integer.parseInt(s))).orElse(25);
         return new Pageable(page, size);
+        
     }
 
 }
