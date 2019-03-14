@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface AirportRepository  extends PagingAndSortingRepository<Location, String>{
+public interface AirportRepository  {//extends PagingAndSortingRepository<Location, String>{
 
     Optional<Location> get(Locale locale, String key);
 

@@ -23,7 +23,7 @@ import lombok.Getter;
 public class Pageable<T> {
 
     private final int page, size;
-    private Sort sort;
+    //private Sort sort;
 
     public Pageable(int page, int size) {
         this.page = page;

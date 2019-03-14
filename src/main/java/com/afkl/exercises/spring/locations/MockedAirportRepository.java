@@ -64,82 +64,16 @@ public class MockedAirportRepository implements AirportRepository {
 
     private Map<String, Location> parseMockData(String lang) {
         try {
-            log.info("Loading static resources from classpath and populating mocks.");
+           // log.info("Loading static resources from classpath and populating mocks.");
             final List<Location> locations = mapper.readValue(
                     new ClassPathResource("locations_".concat(lang).concat(".json")).getInputStream(),
                     mapper.getTypeFactory().constructCollectionType(ArrayList.class, Location.class));
             return locations.parallelStream()
-                    .map(l -> new SimpleEntry<>(l.getCode(), l)).sorted()
+                    .map(l -> new SimpleEntry<>(l.getCode(), l))
                     .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
         } catch (IOException e) {
             throw new IllegalStateException("Unable to initialize mock in-memory AirportRepository.", e);
         }
     }
-
-	@Override
-	public Iterable<Location> findAll(Sort arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Page<Location> findAll(Pageable arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Long count() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void delete(Location arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(Iterable<? extends Location> arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteAll() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean exists(String arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Iterable<Location> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Location findOne(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Location save(Location arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Iterable<Location> save(Iterable<? extends Location> arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

@@ -40,11 +40,11 @@ public class AirportController {
 		this.metricService=metricService;
 	}
 	
-	@RequestMapping(value = "/metric", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/metric", method = RequestMethod.GET)
 	@ResponseBody
 	public Map getMetric() {
 	    return metricService.getStatusMetric();
-	}
+	}*/
 	
 	
 	@RequestMapping(value = "/statusmetric", method = RequestMethod.GET)	
@@ -58,7 +58,7 @@ public class AirportController {
 			@RequestParam(value = "lang", defaultValue = "en") 
 			String lang, Pageable<Location> pageable,@RequestHeader HttpHeaders httpHeader) {
 		
-		log.info(httpHeader.getFirst("trace-id"));
+		//log.info(httpHeader.getFirst("trace-id"));
 		return () -> pageable.partition(repository.list(Locale.forLanguageTag(lang)));
 	}
 
@@ -66,7 +66,7 @@ public class AirportController {
 	public Callable<HttpEntity<Location>> show(@RequestParam(value = "lang",
 	defaultValue = "en") String lang,
 			@PathVariable("key") String key,@RequestHeader HttpHeaders httpHeader) {
-		log.info(httpHeader.getFirst("trace-id"));
+		//log.info(httpHeader.getFirst("trace-id"));
 		return () -> {
 			Thread.sleep(ThreadLocalRandom.current().nextLong(200, 800));
 			return repository.get(Locale.forLanguageTag(lang), key)
@@ -79,7 +79,7 @@ public class AirportController {
 	public Callable<HttpEntity<PagedResources<Resource<Location>>>> find(
 			@RequestParam(value = "lang", defaultValue = "en") String lang, @RequestParam("term") String term,
 			Pageable<Location> pageable,@RequestHeader HttpHeaders httpHeader) {
-		log.info(httpHeader.getFirst("trace-id"));
+		//log.info(httpHeader.getFirst("trace-id"));
 		return () -> repository.find(Locale.forLanguageTag(lang), term)
 				.map(l -> new ResponseEntity<>(pageable.partition(l), OK)).orElse(new ResponseEntity<>(NOT_FOUND));
 	}
